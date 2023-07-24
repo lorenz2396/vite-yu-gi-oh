@@ -1,7 +1,6 @@
 <script>
 import HeaderComponent from "./components/HeaderComponent.vue";
 import MainComponent from "./components/MainComponent.vue";
-import FooterComponent from "./components/FooterComponent.vue";
 
 import axios from "axios";
 import { store } from './store.js';
@@ -11,35 +10,49 @@ export default {
   components: {
       HeaderComponent,
       MainComponent,
-      FooterComponent,
   },
   data() {
     return {
       store
     };
   },
-  methods: {},
-  created() {
-        axios
-            .get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
-            .then(response => {
-                console.log(response);
-                this.store.cards = response.data.data;
-            });
-    }
+  methods: {
+    getArchetype(){ 
+      axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
+      .then(res=>{
+      
+        this.store.archetype=res.data
+        
+      }
+      )
+    },
+  },
+  created(){
+      axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=40&offset=0')
+      .then(res=>{
+        this.store.cards=res.data.data
+      }
+      )
+  
+  }
 };
 </script>
 
 <template>
+  <div class="background">
+    
+    <HeaderComponent/>
 
-  <HeaderComponent/>
-
-  <MainComponent/>
-
-  <FooterComponent/>
-
+    <MainComponent/>
+    
+  </div>
 </template>
 
 <style lang="scss">
-@use "assets/scss/main";
+@use "assets/scss/main" as *;
+
+.background{
+  background-color: $orange-bg;
+  min-height: 100vh;
+}
 </style>

@@ -1,37 +1,58 @@
 <script>
 export default {
-    props: {
-        card: {
-            type: Object,
-            default: {
-                card_images: '',
-                name: '',
-                archetype: '',
-                img_url:'',
-            }
+    data() {
+        return {
         }
-    }
-    
+    },
+    props:{
+        cardData:{
+            type:Object,
+            defult: null
+        }
+    }  
 }
 </script>
 
 <template>
-    <div class="single-card text-center m-4">
-        <div>
-            <img :src="card.card_images[0].img_url" :alt="card.name">
+
+    <div class="col p-3">
+
+        <div class="card">
+
+            <div class="img-container card-img-top">
+                
+                <img :src="cardData.card_images[0].image_url" :alt="cardData.name">
+
+            </div>
+
+            <div class="card-body">
+
+                <h5 class="card-title">{{ cardData.name }}</h5>
+
+                <p class="card-text">{{ cardData.archetype }}</p>
+
+            </div>
+
         </div>
-        <div class="mb-4">
-            <h3>
-                {{ card.name }}
-            </h3>
-        </div>
-        <div>
-            <p class="mb-0">
-                {{ card.archetype }}
-            </p>
-        </div>
+
     </div>
 </template>
 
 <style lang="scss" scoped>
+@use '../assets/scss/partials/variables'as*;
+    .img-container{
+    width: 100%;
+
+    img{
+        width: 100%;
+    }
+    
+    }
+
+    .card-body{
+        background-color: $orange-bg;
+    }
+
+  
+
 </style>

@@ -1,46 +1,58 @@
 <script>
-import CardGame from './CardGame.vue';
-import { store } from '../store.js';
+import {store} from '../store.js'
+import CardGame from './CardGame.vue'
 
 export default {
     name: "MainComponent",
+    components:{
+        CardGame,
+    },
     data() {
         return {
-            store
+            store,
         }
     },
     methods: {
-
+     
     },
-    components: {
-        CardGame
-    },
-    cardsNumber:{
-        type:Number,
-        default: 0,
-    }
 }
 </script>
 
 <template>
     <main>
+
         <div class="container">
-            <div class="cardsNumber">
-                <!-- Found {{ cardsNumber }} cards -->
-            </div>
+
             <div class="row">
-                <div class="col" v-for="(card, i) in store.cards" :key="i">
-                    <CardGame :card="card" />
+
+                <div class="col-auto px-2 my-3">
+
+
                 </div>
+
             </div>
+
+
+            <div class="row flex-wrap row-cols-5 card-container justify-content-between align-items-start mx-3 g-2">
+
+                <div v-for="(card,i) in store.cards" :key="i"  class="col p-3">
+                    
+                    <CardGame :cardData="card"/> 
+
+                </div>
+
+            </div>
+
         </div>
+
+        
     </main>
 </template>
 
 <style lang="scss" scoped>
-main{
-    background-color: #d48f38;
-    padding: 30px;
+
+.card-container{
+    background-color: white;
 }
 
 </style>
